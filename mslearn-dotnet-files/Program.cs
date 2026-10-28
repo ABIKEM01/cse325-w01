@@ -24,8 +24,9 @@ IEnumerable<string> FindFiles(string folderName)
 
     foreach (var file in foundFiles)
     {
-        var extension = Path.GetExtension(file);
-        if (extension == ".json")
+        // Only sales.json files hold a "Total". The salestotals.json files
+        // use "OverallTotal", so including them would add $0.00 entries.
+        if (Path.GetFileName(file) == "sales.json")
         {
             salesFiles.Add(file);
         }
